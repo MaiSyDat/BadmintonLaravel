@@ -81,7 +81,6 @@
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->getFormattedPrice() }}</td>
-
                                                 <td>
                                                     <span class="badge border {{ $product->status_badge_class }}">
                                                         {{ $product->status_name }}

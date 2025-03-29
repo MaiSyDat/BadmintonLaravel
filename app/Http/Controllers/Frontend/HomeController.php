@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Home;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,9 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
-        return view('frontend.index');
+        $categories = Categories::all();
+        $discountedProducts = Product::where('sale', '>', 20)->limit(4)->get();
+        $featuredProducts = Product::orderByDesc('total_pay')->limit(8)->get();
+        return view('frontend.index', compact('categories', 'discountedProducts', 'featuredProducts'));
     }
+
     /**
      * Show the form for creating a new resource.
      */

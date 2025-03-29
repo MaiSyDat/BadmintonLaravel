@@ -21,12 +21,11 @@ class LoginMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
-        if (Auth::id() > 0) {
-            // Nếu đã đăng nhập, chuyển hướng tới dashbroad.index
-            return redirect()->route('dashboard.index');
+        // Kiểm tra nếu người dùng đã đăng nhập và đang ở trang đăng nhập
+        if (Auth::check() && $request->routeIs('auth.admin')) {
+            return redirect()->route('dashboard.index'); // Điều hướng đến dashboard
         }
-        // Tiếp tục xử lý yêu cầu
-        return $next($request);
+
+        return $next($request); // Cho phép request tiếp tục
     }
 }

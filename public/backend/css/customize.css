@@ -5,3 +5,12 @@
     margin-top: 5px;
     flex: left;
 }
+
+.fs-10 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.login-image {
+    width: 100%;
+}

@@ -1,49 +1,5 @@
-.slide-container {
-    position: relative;
+.carousel-item img {
     width: 100%;
-    height: 500px;
-    margin: auto;
-    overflow: hidden;
-}
-
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.slide img {
-    width: 100%;
-    display: block;
-    object-fit: cover; /* Giữ tỷ lệ, phần thừa sẽ bị cắt đi */
-    object-position: center; /* Đảm bảo hình ảnh được căn giữa */
-}
-
-.prev,
-.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
-
-button:focus {
-    outline: none;
+    max-height: 400px;
+    object-fit: cover;
 }

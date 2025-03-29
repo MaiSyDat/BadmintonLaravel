@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Middleware\AuthenticateMiddleware;
 use UniSharp\LaravelFileManager\Lfm;
 
@@ -15,8 +16,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 
 
 // ROUTES PHÍA BACKEND
-Route::prefix('admin')->middleware([AuthenticateMiddleware::class])->group(function () {
-    // Trang tổng quan
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    // Trang tổng quan (chỉ admin mới truy cập được)
     Route::get('dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // Quản lý người dùng
@@ -63,6 +64,4 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 
 // ROUTES PHÍA FRONTEND
-Route::get('/user', function () {
-    return view('frontend.index');
-});
+Route::get('/user', [HomeController::class, 'index'])->name('home.index');

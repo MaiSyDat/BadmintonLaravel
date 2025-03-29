@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function index()
     {
         if (Auth::id() > 0) {
-            return redirect()->route('dashboard.index');
+            return redirect()->route('home.index');
         }
         // Trả về view đăng nhập nằm trong thư mục resources/views/Backend/Auth/Login.blade.php
         return view('Backend.Auth.Login');
@@ -29,23 +29,13 @@ class AuthController extends Controller
     // Hàm xử lý đăng nhập
     public function login(AuthRequest $request)
     {
-        // Thông tin xác thực
         $credentials = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
 
-        // Kiểm tra xác thực
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            // Kiểm tra nếu user không phải admin (role ≠ 1)
-            if ($user->role != 0) {
-                Auth::logout(); // Đăng xuất user không hợp lệ
-                return redirect()->route('auth.admin')->with('error', 'Bạn không phải admin.');
-            }
-
-            return redirect()->route('dashboard.index')->with('success', 'Đăng nhập thành công.');
+            return redirect()->route('home.index')->with('success', 'Đăng nhập thành công.');
         }
 
         return redirect()->route('auth.admin')->with('error', 'Email hoặc mật khẩu không chính xác.');
@@ -79,6 +69,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('auth.admin');
+        return redirect()->route('home.index');
     }
 }

@@ -5,8 +5,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Admin - Dashboard</title>
-
+<title>Trang chủ</title>
+<link rel="icon" href="backend/img/logo/LogoDSmash.png" type="image/x-icon">
 <!-- Font chữ Nunito -->
 <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -20,7 +20,7 @@
 <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/css/customize.css') }}" rel="stylesheet">
 
-<link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/banner/banner.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/main.css') }}" rel="stylesheet">
-<link href="{{ asset('frontend/css/nav/nav.css') }}" rel="stylesheet">

@@ -41,4 +41,11 @@ class Product extends Model
     {
         return number_format($this->price, 0, ',', '.') . ' VNĐ';
     }
+
+    // Hàm tính giá sau khi giảm
+    public function getDiscountedPrice()
+    {
+        $discountedPrice = $this->price - ($this->price * ($this->sale / 100));
+        return number_format($discountedPrice, 0, ',', '.') . ' VNĐ';
+    }
 }

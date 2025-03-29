@@ -9,4 +9,4 @@
 <script src="backend/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Main JS File -->
-<script src="frontend/assets/js/main.js"></script>
+<script src="frontend/js/main.js"></script>
