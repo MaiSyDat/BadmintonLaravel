@@ -24,3 +24,7 @@
 <link href="{{ asset('backend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/banner/banner.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/css/main.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('frontend/css/products/style.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/cart/style.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/checkout/style.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/css/profile/style.css') }}">

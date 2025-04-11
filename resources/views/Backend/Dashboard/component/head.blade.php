@@ -20,5 +20,6 @@
 <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/css/customize.css') }}" rel="stylesheet">
+<link href="{{ asset('backend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 <script src="https://cdn.tiny.cloud/1/xmfz0zkcs3idy9lqpy0u001kgmbrr2dtqe1rsyy9lzz9bn8e/tinymce/6/tinymce.min.js"
     referrerpolicy="origin"></script>

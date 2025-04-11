@@ -10,3 +10,4 @@
 
 <!-- Main JS File -->
 <script src="frontend/js/main.js"></script>
+<script src="{{ asset('frontend/js/cart/cart.js') }}"></script>

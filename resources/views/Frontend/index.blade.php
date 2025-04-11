@@ -56,16 +56,28 @@
             <div class="row">
                 @foreach ($discountedProducts as $product)
                     <div class="col-md-3">
-                        <div class="product-item bg-white m-2">
-                            <span class="discount">-{{ round($product->sale) }}%</span>
-                            <img class="img-fluid" src="{{ asset($product->img) }}" alt="{{ $product->name }}">
-                            <h5 class="truncate-2-lines">{{ $product->name }}</h5>
-                            <p class="price text-danger">
-                                {{ $product->getDiscountedPrice() }}
-                                <del class="text-muted">{{ number_format($product->price, 0, ',', '.') }} VNĐ</del>
-                            </p>
-                            <p class="purchase"><i class="bi bi-cart"></i> {{ $product->total_pay }} lượt mua</p>
-                        </div>
+                        <a href="{{ route('product.show', $product->id) }}">
+                            <div class="product-item bg-white m-2">
+                                <div class="product-discount">
+                                    <span class="discount">-{{ round($product->sale) }}%</span>
+                                </div>
+                                <div class="product-image">
+                                    <img class="img-fluid" src="{{ asset($product->img) }}" alt="{{ $product->name }}">
+                                </div>
+                                <div class="product-name">
+                                    <p class="truncate-2-lines">{{ $product->name }}</p>
+                                </div>
+                                <div class="product-price">
+                                    <p class="price text-danger">
+                                        {{ number_format($product->getDiscountedPrice()) }}đ
+                                        <del class="text-muted">{{ number_format($product->price, 0, ',', '.') }} VNĐ</del>
+                                    </p>
+                                </div>
+                                <div class="product-purchase">
+                                    <p class="purchase"><i class="bi bi-cart"></i> {{ $product->total_pay }} lượt mua</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -79,19 +91,32 @@
         <div class="row">
             @foreach ($featuredProducts as $product)
                 <div class="col-md-3">
-                    <div class="product-item bg-white m-2">
-                        <span class="discount">-{{ round($product->sale) }}%</span>
-                        <img class="img-fluid" src="{{ asset($product->img) }}" alt="{{ $product->name }}">
-                        <h5 class="truncate-2-lines">{{ $product->name }}</h5>
-                        <p class="price text-danger">
-                            {{ $product->getDiscountedPrice() }}
-                            <del class="text-muted">{{ number_format($product->price, 0, ',', '.') }} VNĐ</del>
-                        </p>
-                        <p class="purchase"><i class="bi bi-cart"></i> {{ $product->total_pay }} lượt mua</p>
-                    </div>
+                    <a href="{{ route('product.show', $product->id) }}">
+                        <div class="product-item bg-white m-2">
+                            <div class="product-discount">
+                                <span class="discount">-{{ round($product->sale) }}%</span>
+                            </div>
+                            <div class="product-image">
+                                <img class="img-fluid" src="{{ asset($product->img) }}" alt="{{ $product->name }}">
+                            </div>
+                            <div class="product-name">
+                                <p class="truncate-2-lines">{{ $product->name }}</p>
+                            </div>
+                            <div class="product-price">
+                                <p class="price text-danger">
+                                    {{ number_format($product->getDiscountedPrice()) }}đ
+                                    <del class="text-muted">{{ number_format($product->price, 0, ',', '.') }} VNĐ</del>
+                                </p>
+                            </div>
+                            <div class="product-purchase">
+                                <p class="purchase"><i class="bi bi-cart"></i> {{ $product->total_pay }} lượt mua</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>
+
     </div>
 
     {{-- Về chúng tôi --}}

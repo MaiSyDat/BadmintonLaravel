@@ -10,30 +10,127 @@
                 <form id="editProductForm" action="{{ route('products.update', $product->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    @method('PUT') {{-- Laravel yêu cầu @method('PUT') để cập nhật --}}
+                    @method('PUT')
 
                     <div class="form-group">
                         <label>Ảnh sản phẩm</label>
                         <div class="position-relative d-inline-block">
-                            <img id="imgPreview" src="{{ asset($product->img) }}" alt="Ảnh sản phẩm"
-                                class="rounded border shadow"
-                                style="width: 150px; height: 150px; object-fit: cover; cursor: pointer;">
-                            <input type="file" class="d-none" name="img" id="imgInput" accept="image/*">
+                            <!-- Ảnh đại diện -->
+                            <img id="mainImgPreview"
+                                src="{{ asset($product->img ?? 'backend/img/product/default-product.png') }}"
+                                alt="Ảnh sản phẩm" class="rounded border shadow"
+                                style="width: 150px; height: 150px; object-fit: cover;">
+
+                            <input type="file" class="d-none" name="img" id="mainImgInput" accept="image/*">
                             <button type="button" class="btn btn-primary mt-2"
-                                onclick="document.getElementById('imgInput').click();">Chọn ảnh</button>
+                                onclick="document.getElementById('mainImgInput').click();">
+                                Thêm ảnh đại diện
+                            </button>
                         </div>
                     </div>
 
+                    <!-- Khu vực hiển thị ảnh chi tiết -->
+                    <div class="form-group mt-3">
+                        <label>Ảnh chi tiết</label>
+                        <div id="previewContainer" class="d-flex flex-wrap">
+                            @foreach ($productImages as $image)
+                                <div class="position-relative m-2 image-container" style="width: 100px; height: 100px;"
+                                    data-id="{{ $image->id }}">
+                                    <img src="{{ asset($image->path) }}" class="rounded border shadow"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+
+                                    <i class="position-absolute text-danger bi bi-x-circle rounded-circle delete-image"
+                                        style="font-size: 20px; text-align: center; cursor: pointer; top: -5px; right: 0;">
+                                    </i>
+                                </div>
+                            @endforeach
+
+                            <!-- Nút thêm ảnh -->
+                            <div class="add-image-btn d-flex align-items-center justify-content-center border rounded shadow"
+                                style="width: 100px; height: 100px; cursor: pointer; font-size: 30px; background: #f8f9fa;"
+                                onclick="document.getElementById('detailImgInput').click();">
+                                +
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="deleted_images" id="deletedImages">
+                        <input type="file" class="d-none" name="detail_imgs[]" id="detailImgInput" accept="image/*"
+                            multiple>
+                    </div>
+
                     <script>
-                        document.getElementById('imgInput').addEventListener('change', function(event) {
+                        document.getElementById('mainImgInput').addEventListener('change', function(event) {
                             let file = event.target.files[0];
                             if (file) {
                                 let reader = new FileReader();
                                 reader.onload = function(e) {
-                                    document.getElementById('imgPreview').src = e.target.result;
+                                    document.getElementById('mainImgPreview').src = e.target.result;
                                 };
                                 reader.readAsDataURL(file);
                             }
+                        });
+
+                        document.getElementById('detailImgInput').addEventListener('change', function(event) {
+                            let files = event.target.files;
+                            let previewContainer = document.getElementById('previewContainer');
+
+                            for (let i = 0; i < files.length; i++) {
+                                let fileReader = new FileReader();
+                                fileReader.onload = function(e) {
+                                    let div = document.createElement('div');
+                                    div.className = 'position-relative m-2';
+                                    div.style = 'width: 100px; height: 100px;';
+
+                                    let imgElement = document.createElement('img');
+                                    imgElement.src = e.target.result;
+                                    imgElement.className = 'rounded border shadow';
+                                    imgElement.style = 'width: 100%; height: 100%; object-fit: cover;';
+
+                                    let closeBtn = document.createElement('i');
+                                    closeBtn.className = 'position-absolute text-danger bi bi-x-circle';
+                                    closeBtn.style =
+                                        'font-size: 20px; text-align: center; cursor: pointer; top: -5px; right: 0;';
+                                    closeBtn.onclick = function() {
+                                        div.remove();
+                                    };
+
+                                    div.appendChild(imgElement);
+                                    div.appendChild(closeBtn);
+                                    previewContainer.insertBefore(div, previewContainer.lastElementChild);
+                                };
+                                fileReader.readAsDataURL(files[i]);
+                            }
+                        });
+
+                        function deleteImage(imageId, element) {
+                            fetch('/admin/products/delete-image/' + imageId, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                }
+                            }).then(response => response.json()).then(data => {
+                                if (data.success) {
+                                    element.closest('div').remove();
+                                }
+                            });
+                        }
+
+                        document.addEventListener('DOMContentLoaded', function() {
+                            let deletedImages = [];
+
+                            document.querySelectorAll('.delete-image').forEach(button => {
+                                button.addEventListener('click', function() {
+                                    let imageContainer = this.closest('.image-container');
+                                    let imageId = imageContainer.getAttribute('data-id');
+
+                                    if (imageId) {
+                                        deletedImages.push(imageId);
+                                        document.getElementById('deletedImages').value = deletedImages.join(',');
+                                    }
+
+                                    imageContainer.remove();
+                                });
+                            });
                         });
                     </script>
 

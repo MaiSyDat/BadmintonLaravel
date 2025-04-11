@@ -6,7 +6,11 @@ use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\frontend\ProductController;
+use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Middleware\AuthenticateMiddleware;
 use UniSharp\LaravelFileManager\Lfm;
 
@@ -57,11 +61,28 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 // ROUTES PHÍA AUTH
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('admin', [AuthController::class, 'index'])->name('admin');
+    Route::get('verify-account/{email}', [AuthController::class, 'verify'])->name('verify');
     Route::post('login', [AuthController::class, 'login'])->name('login');
-    Route::get('register', [AuthController::class, 'register'])->name('register');
+    Route::get('register', [AuthController::class, 'register'])
+        ->name('register')
+        ->middleware('guest');
     Route::post('register', [AuthController::class, 'check_register'])->name('register.post');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // ROUTES PHÍA FRONTEND
 Route::get('/user', [HomeController::class, 'index'])->name('home.index');
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+// Cart
+Route::group(['prefix ' => 'cart'], function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/add/{product}', [CartController::class, 'addtoCart'])->name('add.cart');
+    Route::get('/delete/{product}', [CartController::class, 'deleteCart'])->name('delete.cart');
+    Route::get('update/{id}/{quantity}', [CartController::class, 'updateCart'])->name('update.cart');
+});
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');

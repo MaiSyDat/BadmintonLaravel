@@ -13,9 +13,9 @@
          <div class="collapse navbar-collapse" id="navbarNav">
              <ul class="navbar-nav mx-auto header-menu">
                  <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Trang chủ</a></li>
-                 <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Sản phẩm</a>
-                     <div class="dropdown-menu">
+                 <li class="nav-item nav-dropdown">
+                     <a class="nav-link nav-dropdown" href="{{ route('product.index') }}">Sản phẩm</a>
+                     <div class="dropdown-menu-chillren">
                          @foreach ($categories as $category)
                              <a class="dropdown-item" href="">
                                  {{ $category->name }}
@@ -49,7 +49,9 @@
                      </ul>
                  </div>
 
-                 <i class="bi bi-cart3 mr-5"></i>
+                 <a class="cart-items" href="{{ route('cart.index') }}"><i class="bi bi-cart3 mr-5"></i>
+                     <span>{{ $cart->totalQuantity }}</span>
+                 </a>
                  @if (Auth::check())
                      <!-- Người dùng đã đăng nhập -->
                      <div class="dropdown">
@@ -58,9 +60,6 @@
                              <span class="ms-2">{{ Auth::user()->name }}</span>
                          </a>
                          <ul class="dropdown-menu mt-2" aria-labelledby="userDropdown">
-                             {{-- <li><a class="dropdown-item" href="{{ route('profile') }}">Quản lý trang cá nhân</a></li>
-                             <li><a class="dropdown-item" href="{{ route('settings') }}">Cài đặt</a></li>
-                             <li><a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a></li> --}}
                              <li><a class="dropdown-item" href="">Quản lý trang cá nhân</a></li>
 
                              @if (Auth::user()->role == 0)

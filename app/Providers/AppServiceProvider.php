@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Support\Facades\View;
@@ -18,7 +19,11 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('Frontend.Layout.nav', function ($view) {
             $categories = Categories::all();
-            $view->with(compact('categories'));
+            $cart = new Cart();
+            $view->with([
+                'categories' => $categories,
+                'cart' => $cart
+            ]);
         });
     }
 }

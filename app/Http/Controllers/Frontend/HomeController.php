@@ -16,8 +16,16 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $discountedProducts = Product::where('sale', '>', 20)->limit(4)->get();
+        $discountedProducts = Product::where('sale', '>', 20)
+            ->orderByDesc('sale')
+            ->limit(4)
+            ->get();
+
         $featuredProducts = Product::orderByDesc('total_pay')->limit(8)->get();
+        // $featuredProducts = Product::where('total_pay')
+        //     ->orderBy('total_pay')
+        //     ->limit(8)
+        //     ->get();
         return view('frontend.index', compact('categories', 'discountedProducts', 'featuredProducts'));
     }
 

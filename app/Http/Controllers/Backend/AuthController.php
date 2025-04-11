@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
+use App\Mail\VerifyAccount;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -22,7 +24,6 @@ class AuthController extends Controller
         if (Auth::id() > 0) {
             return redirect()->route('home.index');
         }
-        // Trả về view đăng nhập nằm trong thư mục resources/views/Backend/Auth/Login.blade.php
         return view('Backend.Auth.Login');
     }
 
@@ -52,16 +53,27 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'name' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
         ]);
-        $data = $request->all('email', 'name');
-        $data['password'] = bcrypt($request['password']);
-        if (User::create($data)) {
-            return redirect()->route('auth.admin')->with('success', 'Đăng ký thành công.');
+
+        $data = $request->only(['email', 'name']);
+        $data['password'] = bcrypt($request->password);
+
+        if ($acc = User::create($data)) {
+            Mail::to($acc->email)->send(new VerifyAccount($acc));
+            return redirect()->route('auth.admin')->with('success', 'Vui lòng kiểm tra email để xác thực tài khoản.');
         }
         return redirect()->route('auth.register')->with('error', 'Đăng ký thất bại.');
     }
+
+    public function verify($email)
+    {
+        $acc = User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        User::where('email', $email)->update(['email_verified_at' => now()]);
+        return redirect()->route('auth.admin')->with('success', 'Đăng ký thành công.');
+    }
+
 
     // Hàm xử lý đăng xuất
     public function logout(Request $request)
