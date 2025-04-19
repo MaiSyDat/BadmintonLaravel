@@ -21,5 +21,5 @@
 <link href="{{ asset('backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/css/customize.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-<script src="https://cdn.tiny.cloud/1/xmfz0zkcs3idy9lqpy0u001kgmbrr2dtqe1rsyy9lzz9bn8e/tinymce/6/tinymce.min.js"
-    referrerpolicy="origin"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.css" rel="stylesheet">

@@ -41,7 +41,8 @@
                      <span class="old-price">{{ number_format($product->price) }}đ</span>
                  </p>
 
-                 <form action="{{ route('add.cart', $product->id) }}" method="GET" class="">
+                 <form action="{{ route('add.cart', $product->id) }}" method="POST">
+                     @csrf
                      <div class="quantity-wrapper d-flex align-items-center gap-2 my-3">
                          <button class="btn btn-outline-secondary btn-sm" type="button"
                              onclick="decreaseQuantity()">-</button>
@@ -51,13 +52,12 @@
                              onclick="increaseQuantity()">+</button>
                      </div>
                      <div class="d-flex gap-2 mb-3">
-                         <button type="submit" class="btn btn-outline-secondary">Thêm vào giỏ</button>
-                         <button class="btn btn-danger text-white" type="button">Mua ngay</button>
+                         <button type="submit" name="action" value="add" class="btn btn-outline-secondary">Thêm vào
+                             giỏ</button>
+                         <button type="submit" name="action" value="buy_now" class="btn btn-danger text-white">Mua
+                             ngay</button>
                      </div>
                  </form>
-
-
-
 
                  <div class="offer-box mb-3">
                      <h6>🎁Ưu đãi:</h6>

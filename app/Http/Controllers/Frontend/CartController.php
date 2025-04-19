@@ -14,6 +14,10 @@ class CartController extends Controller
         $quantity = (int)$request->input('quantity', 1);
         $cart->add($product, $quantity);
 
+        if ($request->input('action') === 'buy_now') {
+            return redirect()->route('cart.index')->with('success', 'Đã thêm sản phẩm và chuyển đến giỏ hàng');
+        }
+
         return redirect()->back()->with('success', 'Đã thêm sản phẩm vào giỏ hàng');
     }
 

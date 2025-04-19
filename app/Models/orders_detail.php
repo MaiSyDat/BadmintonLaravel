@@ -16,4 +16,9 @@ class orders_detail extends Model
         'quantity',
         'total_price'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

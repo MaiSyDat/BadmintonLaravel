@@ -39,6 +39,7 @@
                         <a class="collapse-item" href="{{ route('user.index') }}">Quản lý người dùng</a>
                         <a class="collapse-item" href="{{ route('categories.index') }}">Quản lý danh mục</a>
                         <a class="collapse-item" href="{{ route('products.index') }}">Quản lý sản phẩm</a>
+                        <a class="collapse-item" href="{{ route('ordersManager.index') }}">Quản lý đơn hàng</a>
                     </div>
                 </div>
             </li>

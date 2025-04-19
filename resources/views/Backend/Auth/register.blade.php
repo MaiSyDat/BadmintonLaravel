@@ -24,15 +24,25 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 placeholder="Địa chỉ email" name="email" required>
+                                            @if ($errors->has('email'))
+                                                <span class="message-error">*{{ $errors->first('email') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="password" class="form-control form-control-user"
                                                     placeholder="Nhập mật khẩu" name="password" required>
+                                                @if ($errors->has('password'))
+                                                    <span class="message-error">*{{ $errors->first('password') }}</span>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="password" class="form-control form-control-user"
                                                     placeholder="Nhập lại mật khẩu" name="confirm_password" required>
+                                                @if ($errors->has('confirm_password'))
+                                                    <span
+                                                        class="message-error">*{{ $errors->first('confirm_password') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">

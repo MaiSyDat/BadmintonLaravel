@@ -24,7 +24,7 @@ class ProductController extends Controller
     {
         $product = Product::where('status', 1)->findOrFail($id);
 
-        $discountedProducts = Product::where('sale', '>', 20)
+        $discountedProducts = Product::where('sale', '>', 10)
             ->orderByDesc('sale')
             ->limit(4)
             ->get();

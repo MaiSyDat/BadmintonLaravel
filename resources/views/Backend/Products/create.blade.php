@@ -101,12 +101,11 @@
                     </div>
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea class="form-control" id="new-content" name="description" rows="3" placeholder="Mô tả sản phẩm"></textarea>
+                        <textarea class="form-control new-content" name="description" rows="3" placeholder="Mô tả sản phẩm"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Nội dung chi tiết</label>
-                        <textarea class="form-control" id="new-content" name="content" rows="5"
-                            placeholder="Nhập nội dung chi tiết sản phẩm"></textarea>
+                        <textarea class="form-control new-content" name="content" rows="5" placeholder="Nhập nội dung chi tiết sản phẩm"></textarea>
 
                     </div>
                     <div class="form-group">

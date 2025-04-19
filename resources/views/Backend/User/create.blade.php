@@ -30,11 +30,11 @@
 
                     <script>
                         document.getElementById('imgInput').addEventListener('change', function(event) {
-                            let file = event.target.files[0]; // Lấy file người dùng chọn
+                            let file = event.target.files[0];
                             if (file) {
                                 let reader = new FileReader();
                                 reader.onload = function(e) {
-                                    document.getElementById('imgPreview').src = e.target.result; // Hiển thị ảnh ngay lập tức
+                                    document.getElementById('imgPreview').src = e.target.result;
                                 };
                                 reader.readAsDataURL(file);
                             }

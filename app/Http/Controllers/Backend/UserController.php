@@ -12,14 +12,24 @@ class UserController extends Controller
 {
     public function __construct() {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(15);
         $config = $this->config();
+
+        $query = User::query();
+
+        // Nếu có từ khóa tìm kiếm
+        if ($request->has('keyword') && $request->keyword != '') {
+            $keyword = $request->keyword;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%");
+            });
+        }
+
+        $users = $query->paginate(15)->withQueryString(); // giữ lại query string khi phân trang
 
         return view('backend.user.index', compact('config', 'users'));
     }
-
 
     // Hiển thị form thêm mới user
     public function create()

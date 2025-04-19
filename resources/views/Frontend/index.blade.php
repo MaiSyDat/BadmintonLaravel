@@ -93,9 +93,6 @@
                 <div class="col-md-3">
                     <a href="{{ route('product.show', $product->id) }}">
                         <div class="product-item bg-white m-2">
-                            <div class="product-discount">
-                                <span class="discount">-{{ round($product->sale) }}%</span>
-                            </div>
                             <div class="product-image">
                                 <img class="img-fluid" src="{{ asset($product->img) }}" alt="{{ $product->name }}">
                             </div>

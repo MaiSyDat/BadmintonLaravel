@@ -41,7 +41,8 @@
                                                 <label class="custom-control-label" for="customCheck">Nhớ tôi</label>
                                             </div>
                                             <div class="text-center">
-                                                <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
+                                                <a class="small" href="{{ route('auth.password.forgot.form') }}">Quên mật
+                                                    khẩu?</a>
                                             </div>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">

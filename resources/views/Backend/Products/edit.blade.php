@@ -151,12 +151,12 @@
 
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea id="new-content" class="form-control" name="description" rows="3">{{ $product->description }}</textarea>
+                        <textarea class="form-control new-content" name="description" rows="3">{{ $product->description }}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Nội dung chi tiết</label>
-                        <textarea id="new-content" class="form-control" name="content" rows="5">{{ $product->content }}</textarea>
+                        <textarea class="form-control new-content" name="content" rows="5">{{ $product->content }}</textarea>
                     </div>
 
                     <div class="form-group">

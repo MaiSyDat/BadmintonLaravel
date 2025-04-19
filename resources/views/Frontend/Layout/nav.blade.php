@@ -35,18 +35,13 @@
                  </div>
                  <!-- Overlay tìm kiếm -->
                  <div class="search-overlay" id="searchOverlay">
-                     <div class="search-box d-flex">
+                     <form class="search-box d-flex" id="searchForm">
                          <input type="text" class="form-control" id="searchInput"
                              placeholder="Nhập từ khóa tìm kiếm...">
-                         <button class="btn btn-danger close-search mx-2" id="closeSearch"><i
+                         <button type="submit" class="btn-search btn btn-sm btn-danger mx-2 w-10">Tìm kiếm</button>
+                         <button type="button" class="btn close-search mx-1" id="closeSearch"><i
                                  class="bi bi-x-lg"></i></button>
-                     </div>
-                     <!-- Gợi ý tìm kiếm -->
-                     <ul class="search-suggestions" id="suggestions">
-                         <li>Gợi ý 1</li>
-                         <li>Gợi ý 2</li>
-                         <li>Gợi ý 3</li>
-                     </ul>
+                     </form>
                  </div>
 
                  <a class="cart-items" href="{{ route('cart.index') }}"><i class="bi bi-cart3 mr-5"></i>
@@ -60,7 +55,8 @@
                              <span class="ms-2">{{ Auth::user()->name }}</span>
                          </a>
                          <ul class="dropdown-menu mt-2" aria-labelledby="userDropdown">
-                             <li><a class="dropdown-item" href="">Quản lý trang cá nhân</a></li>
+                             <li><a class="dropdown-item" href="{{ route('profile.index') }}">Quản lý trang cá nhân</a>
+                             </li>
 
                              @if (Auth::user()->role == 0)
                                  <li><a class="dropdown-item" href="{{ route('dashboard.index') }}">Vào trang quản

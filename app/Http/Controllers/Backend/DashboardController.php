@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Orders;
+use App\Models\orders_detail;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,8 +16,12 @@ class DashboardController extends Controller
     public function index()
     {
         $config = $this->config();
+        $soSanPham = Product::count();
+        $luotMua = orders_detail::sum('quantity');
+        $soNguoiDung = User::count();
+        $doanhThu = Orders::where('status_payment', 'completed')->sum('total_price');
 
-        return view('backend.dashboard.index', compact('config'));
+        return view('backend.dashboard.index', compact('config', 'soSanPham', 'luotMua', 'soNguoiDung', 'doanhThu'));
     }
 
     private function config()

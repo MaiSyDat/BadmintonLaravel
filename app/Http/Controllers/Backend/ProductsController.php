@@ -13,11 +13,21 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(15);
+
+        $query = Product::with('category');
+
+        if ($request->has('keyword') && $request->keyword != '') {
+            $keyword = $request->keyword;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%");
+            });
+        }
+
+        $products = $query->paginate(15)->withQueryString();
         $config = $this->config();
-        $products = Product::with('category')->get();
+
         return view('backend.products.index', compact(
             'config',
             'products'

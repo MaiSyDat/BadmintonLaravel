@@ -30,9 +30,19 @@ class User extends Authenticatable
         'status',
     ];
 
+    public function orders()
+    {
+        return $this->hasMany(orders::class, 'user_id', 'id');
+    }
+
+
     public function getRoleNameAttribute()
     {
         return $this->role == 0 ? 'Admin' : 'User';
+    }
+    public function getGenderNameAttribute()
+    {
+        return $this->role == 0 ? 'Nam' : 'Nữ';
     }
 
     public function getStatusNameAttribute()

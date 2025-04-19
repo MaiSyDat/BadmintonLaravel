@@ -17,6 +17,7 @@
                                 <th>Giá</th>
                                 <th>Số lượng</th>
                                 <th>Tổng giá</th>
+                                <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,12 +60,12 @@
                         </tbody>
                         <tfoot class="table-light">
                             <tr class="align-middle">
-                                <td colspan="4" class="text-end fw-bold">Tổng số lượng:</td>
+                                <td colspan="5" class="text-end fw-bold">Tổng số lượng:</td>
                                 <td class="fw-bold fs-8 total-quantity">{{ number_format($cart->totalQuantity) }} sản phẩm
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="text-end fw-bold">Tổng cộng:</td>
+                                <td colspan="5" class="text-end fw-bold">Tổng cộng:</td>
                                 <td class="text-danger fw-bold fs-5 total-price">{{ number_format($cart->totalPrice) }}đ
                                 </td>
                             </tr>

@@ -31,16 +31,19 @@
                                 </div>
                             </div>
 
-                            <!-- Ô tìm kiếm + nút tìm kiếm -->
+                            <!-- nút tìm kiếm -->
                             <div class="col-sm-12 col-md-6">
-                                <div id="dataTable_filter" class="dataTables_filter d-flex">
-                                    <label class="w-100">
-                                        Search:
-                                        <input type="search" class="form-control form-control-sm d-inline-block w-75"
-                                            placeholder="Nhập từ khóa..." aria-controls="dataTable">
-                                        <button class="btn btn-primary"><i class="fas fa-fw fa-search"></i></button>
-                                    </label>
-                                </div>
+                                <form action="{{ route('products.index') }}" method="get">
+                                    <div id="dataTable_filter" class="dataTables_filter d-flex">
+                                        <label class="w-100">
+                                            Search:
+                                            <input type="search" name="keyword" value="{{ request('keyword') }}"
+                                                class="form-control form-control-sm d-inline-block w-75"
+                                                placeholder="Nhập từ khóa..." aria-controls="dataTable">
+                                            <button class="btn btn-primary"><i class="fas fa-fw fa-search"></i></button>
+                                        </label>
+                                    </div>
+                                </form>
                             </div>
 
                             <!-- Nút Thêm người dùng -->
